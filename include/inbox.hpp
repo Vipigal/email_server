@@ -20,7 +20,7 @@ class Inbox{
 		void clean();
 
 		//adiciona um email novo a fila, na ultima posicao
-		void add(Email* email);
+		void add(Email* email, int pri);
 
 		//retorna o email da primeira posicao e o retira da fila
 		//o topo da fila agora eh o proximo email a ser lido e o email eh deletado.

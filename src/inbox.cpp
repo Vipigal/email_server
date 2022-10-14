@@ -22,11 +22,27 @@ void Inbox::clean(){
 	last=first;
 }
 
-void Inbox::add(Email* email){
+//adiciona um email na fila, de acordo com sua prioridade
+void Inbox::add(Email* email, int pri){
+	//seta o rank do email
+	email->setRank(pri);
+
+	/*loop para posicionar o iterador na posicao anterior a que se deve inserir o email
+	Se ha dois emails com prioridades 5 e 3, e se quer adicionar um com pri=4, o iterador sera parado na posicao do email com pri=5*/
+
+	Cell* iterator;
+	iterator=first;
+	if(first->key!=nullptr){ //se a primeira chave eh nula, quer dizer que a inbox esta vazia, nenhum email foi adicionado ainda
+		while(iterator->next->key->getRank() > pri && iterator->next!=nullptr){
+			iterator=iterator->next;
+		}
+	}
+
+	//cria uma nova celula com o email desejado, e a insere na posicao next do iterador.
 	Cell* newCell = new Cell;
 	newCell->key=email;
-	last->next=newCell;
-	last=last->next;
+	newCell->next=iterator->next;
+	iterator->next=newCell;
 	++size;
 
 }
