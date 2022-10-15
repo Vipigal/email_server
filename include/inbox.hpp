@@ -26,6 +26,8 @@ class Inbox{
 		//o topo da fila agora eh o proximo email a ser lido e o email eh deletado.
 		Email* read();
 
+		int getSize() const;
+
 		//desaloca a memoria da caixa de entrada, apagando todos os seus emails
 		virtual ~Inbox();
 

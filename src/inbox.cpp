@@ -1,8 +1,9 @@
 #include "inbox.hpp"
+#include <iostream>
 
 Inbox::Inbox(){
 	size=0;
-	first=new Cell{.key=nullptr,.next=nullptr};
+	first=new Cell{nullptr, nullptr};
 	last=first;
 }
 
@@ -27,24 +28,32 @@ void Inbox::add(Email* email, int pri){
 	//seta o rank do email
 	email->setRank(pri);
 
-	/*loop para posicionar o iterador na posicao anterior a que se deve inserir o email
-	Se ha dois emails com prioridades 5 e 3, e se quer adicionar um com pri=4, o iterador sera parado na posicao do email com pri=5*/
-
-	Cell* iterator;
-	iterator=first;
-	if(first->key!=nullptr){ //se a primeira chave eh nula, quer dizer que a inbox esta vazia, nenhum email foi adicionado ainda
-		while(iterator->next->key->getRank() > pri && iterator->next!=nullptr){
-			iterator=iterator->next;
-		}
+	if(empty()){
+		first=new Cell{email,nullptr};
+		size++;
+		return;
 	}
 
-	//cria uma nova celula com o email desejado, e a insere na posicao next do iterador.
-	Cell* newCell = new Cell;
-	newCell->key=email;
-	newCell->next=iterator->next;
-	iterator->next=newCell;
-	++size;
-
+	Cell* iterator=first;
+	while(iterator->key->getRank()>pri){
+		if(iterator->next==nullptr){//caso o elemento seja o ultimo da fila
+			iterator->next=new Cell{email,nullptr};
+			size++;
+			return;
+		}
+		else{
+			if(iterator->next->key->getRank()>pri){
+				iterator=iterator->next;
+			}
+			else{
+				iterator->next=new Cell{email,iterator->next};
+				size++;
+				return;
+			}
+		}
+	}
+	first=new Cell{email,first};
+	size++;
 }
 
 Email* Inbox::read(){
@@ -54,7 +63,7 @@ Email* Inbox::read(){
 	Email* aux;
 	Cell* p;
 
-	aux=first->next->key;
+	aux=first->key;
 	p=first;
 	first=first->next;
 
@@ -62,6 +71,10 @@ Email* Inbox::read(){
 	--size;
 	return aux;
 
+}
+
+int Inbox::getSize() const {
+	return size;
 }
 
 

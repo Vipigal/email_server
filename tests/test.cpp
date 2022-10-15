@@ -6,10 +6,23 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 	Inbox* teste= new Inbox();
-	Email* novo= new Email("teste1");
-	teste->add(novo,1);
-	Email* received=teste->read();
-	cout<<received->getMessage()<<endl;
+	Email* pri0= new Email("pri 0");
+	Email* pri2 = new Email("pri 2");
+	Email* pri9= new Email("pri 9");
+	teste->add(pri2,2);
+	teste->add(pri0,0);
+	teste->add(pri9,9);
+	//teste->add(pri0,0);
+	try{
+		for(int i=0;i<3;i++){
+			//cout<<teste->getSize()<<endl;
+			Email* received=teste->read();
+			cout<<received->getMessage()<<endl;
+
+		}
+	}catch(const char* error){
+		cout<<error<<endl;
+	}
 
 
 	return 0;
