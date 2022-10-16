@@ -9,8 +9,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/email.o $(OBJ)/inbox.o $(OBJ)/user.o $(OBJ)/main.o
-HDRS = $(INC)/email.hpp $(INC)/user.hpp $(INC)/inbox.hpp
+OBJS = $(OBJ)/email.o $(OBJ)/inbox.o $(OBJ)/user.o $(OBJ)/main.o 
+HDRS = $(INC)/email.hpp $(INC)/user.hpp $(INC)/inbox.hpp $(INC)/msgassert.h
 CPFLAGS = -Wall -c -I$(INC)
 CXXFLAGS = -std=c++11 -g -Wall
 
