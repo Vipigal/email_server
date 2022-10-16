@@ -33,6 +33,5 @@ class Inbox{
 
 	private:
 		Cell* first;
-		Cell* last;
 		int size;
 };
