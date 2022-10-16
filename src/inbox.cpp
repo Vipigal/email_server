@@ -4,7 +4,6 @@
 Inbox::Inbox(){
 	size=0;
 	first=new Cell{nullptr, nullptr};
-	last=first;
 }
 
 bool Inbox::empty(){
@@ -20,7 +19,6 @@ void Inbox::clean(){
 		p=first->next;
 	}
 	size=0;
-	last=first;
 }
 
 //adiciona um email na fila, de acordo com sua prioridade
@@ -35,7 +33,7 @@ void Inbox::add(Email* email, int pri){
 	}
 
 	Cell* iterator=first;
-	while(iterator->key->getRank()>pri){
+	while(iterator->key->getRank()>=pri){
 		if(iterator->next==nullptr){//caso o elemento seja o ultimo da fila
 			iterator->next=new Cell{email,nullptr};
 			size++;
