@@ -57,9 +57,6 @@ int main(int argc, char const *argv[]){
 
 	}
 
-	
-
-
 
 	input.close();
 

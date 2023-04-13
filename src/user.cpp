@@ -119,5 +119,17 @@ void UserList::addEmail(int id, Email* email){
 	std::cout<<"OK: MENSAGEM PARA "<<id<<" ENTREGUE"<<std::endl;
 }
 
+UserList::~UserList(){
+	No* p;
+	p=first;
+	while(p!=nullptr){
+		first->next=p->next;
+		delete p;
+		p=first->next;
+	}
+	delete first;
+	delete last;
+	size=0;
+}
 
 
